@@ -35,7 +35,7 @@ total_wt=0
 total_tat=0
 
 for ((i = 0; i < n; i++)); do
-  echo -e "P${pid[$i]}\t${bt[$i]}\t${wt[$i]}\t${tat[$i]}"
+  echo "P${pid[$i]}\t${bt[$i]}\t${wt[$i]}\t${tat[$i]}"
   total_wt=$((total_wt + wt[i]))
   total_tat=$((total_tat + tat[i]))
 done
