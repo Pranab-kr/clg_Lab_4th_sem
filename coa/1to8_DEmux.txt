@@ -1,0 +1,72 @@
+module demux_1to8(
+    input EN,
+    input D,
+    input [2:0] S,
+    output reg [7:0] Y
+);
+
+always @(*) begin
+
+    if(EN) begin
+
+        case(S)
+            3'b000: Y = 8'b00000001 & {8{D}};
+            3'b001: Y = 8'b00000010 & {8{D}};
+            3'b010: Y = 8'b00000100 & {8{D}};
+            3'b011: Y = 8'b00001000 & {8{D}};
+            3'b100: Y = 8'b00010000 & {8{D}};
+            3'b101: Y = 8'b00100000 & {8{D}};
+            3'b110: Y = 8'b01000000 & {8{D}};
+            3'b111: Y = 8'b10000000 & {8{D}};
+            default: Y = 8'b00000000;
+        endcase
+
+    end
+
+    else begin
+        Y = 8'b00000000;
+    end
+
+end
+
+endmodule
+
+//simu
+
+module demux_1to8_tb;
+
+reg EN;
+reg D;
+reg [2:0] S;
+wire [7:0] Y;
+
+demux_1to8 uut(
+    .EN(EN),
+    .D(D),
+    .S(S),
+    .Y(Y)
+);
+
+initial begin
+
+    D = 1'b1;
+
+    EN = 0; S = 3'b000;
+
+    #10 EN = 1; S = 3'b000;
+    #10 S = 3'b001;
+    #10 S = 3'b010;
+    #10 S = 3'b011;
+    #10 S = 3'b100;
+    #10 S = 3'b101;
+    #10 S = 3'b110;
+    #10 S = 3'b111;
+
+    #10 EN = 0;
+
+    #10;
+    $finish;
+
+end
+
+endmodule

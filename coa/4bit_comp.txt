@@ -1,0 +1,42 @@
+module comp4bit(
+    input [3:0] A,
+    input [3:0] B,
+    output G,
+    output L,
+    output E
+);
+
+assign G = (A > B);
+assign L = (A < B);
+assign E = (A == B);
+
+endmodule
+
+//simu
+
+module comp4bit_tb;
+
+reg [3:0] A, B;
+wire G, L, E;
+
+comp4bit uut(
+    .A(A),
+    .B(B),
+    .G(G),
+    .L(L),
+    .E(E)
+);
+
+initial begin
+
+    A = 4'b0101; B = 4'b0011;
+    #10 A = 4'b1010; B = 4'b1010;
+    #10 A = 4'b0010; B = 4'b0100;
+    #10 A = 4'b1111; B = 4'b0111;
+
+    #10;
+    $finish;
+
+end
+
+endmodule

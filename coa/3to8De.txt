@@ -1,0 +1,67 @@
+module decoder_3to8(
+    input EN,
+    input [2:0] A,
+    output reg [7:0] Y
+);
+
+always @(*) begin
+
+    if(EN) begin
+
+        case(A)
+            3'b000: Y = 8'b00000001;
+            3'b001: Y = 8'b00000010;
+            3'b010: Y = 8'b00000100;
+            3'b011: Y = 8'b00001000;
+            3'b100: Y = 8'b00010000;
+            3'b101: Y = 8'b00100000;
+            3'b110: Y = 8'b01000000;
+            3'b111: Y = 8'b10000000;
+            default: Y = 8'b00000000;
+        endcase
+
+    end
+
+    else begin
+        Y = 8'b00000000;
+    end
+
+end
+
+endmodule
+
+//simu
+
+module decoder_3to8_tb;
+
+reg EN;
+reg [2:0] A;
+wire [7:0] Y;
+
+decoder_3to8 uut(
+    .EN(EN),
+    .A(A),
+    .Y(Y)
+);
+
+initial begin
+
+    EN = 0; A = 3'b000;
+
+    #10 EN = 1; A = 3'b000;
+    #10 A = 3'b001;
+    #10 A = 3'b010;
+    #10 A = 3'b011;
+    #10 A = 3'b100;
+    #10 A = 3'b101;
+    #10 A = 3'b110;
+    #10 A = 3'b111;
+
+    #10 EN = 0;
+
+    #10;
+    $finish;
+
+end
+
+endmodule

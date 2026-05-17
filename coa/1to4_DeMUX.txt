@@ -1,0 +1,64 @@
+module demux_1to4(
+    input EN,
+    input D,
+    input [1:0] S,
+    output reg [3:0] Y
+);
+
+always @(*) begin
+
+    if(EN) begin
+
+        case(S)
+            2'b00: Y = 4'b0001 & {4{D}};
+            2'b01: Y = 4'b0010 & {4{D}};
+            2'b10: Y = 4'b0100 & {4{D}};
+            2'b11: Y = 4'b1000 & {4{D}};
+            default: Y = 4'b0000;
+        endcase
+
+    end
+
+    else begin
+        Y = 4'b0000;
+    end
+
+end
+
+endmodule
+
+//simu
+
+module demux_1to4_tb;
+
+reg EN;
+reg D;
+reg [1:0] S;
+wire [3:0] Y;
+
+demux_1to4 uut(
+    .EN(EN),
+    .D(D),
+    .S(S),
+    .Y(Y)
+);
+
+initial begin
+
+    D = 1'b1;
+
+    EN = 0; S = 2'b00;
+
+    #10 EN = 1; S = 2'b00;
+    #10 S = 2'b01;
+    #10 S = 2'b10;
+    #10 S = 2'b11;
+
+    #10 EN = 0;
+
+    #10;
+    $finish;
+
+end
+
+endmodule
