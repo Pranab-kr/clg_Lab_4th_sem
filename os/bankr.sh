@@ -34,6 +34,7 @@ for ((i = 0; i < m; i++)); do
   read avail[$i]
 done
 
+#calcullate Need Matrix (Need = Max - Allocation)
 for ((i = 0; i < n; i++)); do
   finish[$i]=0
   for ((j = 0; j < m; j++)); do
