@@ -35,7 +35,7 @@ total_wt=0
 total_tat=0
 
 for ((i = 0; i < n; i++)); do
-  echo "P${pid[$i]}\t${bt[$i]}\t${wt[$i]}\t${tat[$i]}"
+  echo -e "P${pid[$i]}\t${bt[$i]}\t${wt[$i]}\t${tat[$i]}"
   total_wt=$((total_wt + wt[i]))
   total_tat=$((total_tat + tat[i]))
 done
@@ -46,3 +46,28 @@ avg_tat=$(echo "scale=2; $total_tat / $n" | bc)
 
 echo -e "\nAverage Waiting Time: $avg_wt"
 echo "Average Turnaround Time: $avg_tat"
+
+
+# Output
+# Enter number of processes:
+# 4
+#
+# Enter burst time for process 1:
+# 5
+#
+# Enter burst time for process 2:
+# 3
+#
+# Enter burst time for process 3:
+# 8
+#
+# Enter burst time for process 4:
+# 6
+# Process  BT  WT  TAT
+# P1       5   0   5
+# P2       3   5   8
+# P3       8   8   16
+# P4       6   16  22
+#
+# Average Waiting Time: 7.25
+# Average Turnaround Time: 12.75

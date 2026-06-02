@@ -56,3 +56,27 @@ avg_tat=$(echo "scale=2; $total_tat / $n" | bc)
 
 echo -e "\nAverage Waiting Time: $avg_wt"
 echo "Average Turnaround Time: $avg_tat"
+#
+# output
+# Enter number of processes:
+# 4
+#
+# Enter burst time for process 1:
+# 6
+#
+# Enter burst time for process 2:
+# 8
+#
+# Enter burst time for process 3:
+# 7
+#
+# Enter burst time for process 4:
+# 3
+# Process	BT	WT	TAT
+# P4	3	0	3
+# P1	6	3	9
+# P3	7	9	16
+# P2	8	16	24
+#
+# Average Waiting Time: 7.00
+# Average Turnaround Time: 13.00

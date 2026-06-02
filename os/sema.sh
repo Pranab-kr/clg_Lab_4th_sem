@@ -4,7 +4,8 @@ echo 1 >semaphore.txt
 
 wait_semaphore() {
 
-  while true; do
+  while true 
+    do
     value=$(cat semaphore.txt)
 
     if [ "$value" -gt 0 ]; then
